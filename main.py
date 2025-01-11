@@ -1,5 +1,5 @@
 from parser import preprocessor, remove_overbrackets, from_string_to_expression
-from logic import proof
+from logic import proof, preproof
 from time import perf_counter
 
 
@@ -11,6 +11,10 @@ def get_time(res):
 
 
 if __name__ == '__main__':
+    print("Start preproof:")
+    preproof()
+
+    print("Preproof complete, proving axioms and expression")
     axioms = {
         'axiom_4': 'A*B>A',
         'axiom_5': 'A*B>B',
