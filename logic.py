@@ -241,22 +241,30 @@ def preproof():
     A = Variable('A')
     B = Variable('B')
     expr = Implication(Negation(A), Implication(A, B))
+    print(expr)
     expressions, req = deduce(expr)
     axiom1(expressions, req)
+    print(expressions)
     axiom3(expressions)
+    print(expressions)
 
     if req in expressions:
-        print("Yay")
+        print("Axiom 10 is proved")
 
     # modus tollens
     expressions = [Implication(A, B), Negation(B)]
     req = Negation(A)
 
+    print(*expressions, '|-', req)
+
     axiom1(expressions, req)
+    print(expressions)
     axiom3(expressions)
+    print(expressions)
 
     if req in expressions:
-        print("Yay2")
+        print("Modus tollens is proved")
+
 
 
 def proof(expression):
@@ -265,11 +273,15 @@ def proof(expression):
     start = perf_counter()
     while time_limit > 0:
         axiom1(expressions, exp)
+        print(expressions)
         axiom3(expressions)
+        print(expressions)
         modus_ponens(expressions, exp)
+        print(expressions)
         modus_tollens(expressions, exp)
+        print(expressions)
         axiom10(expressions, exp)
-        expressions = remove_duplicates(expressions)
+        print(expressions)
         if exp in expressions:
             print("Expression is proved")
             return True
